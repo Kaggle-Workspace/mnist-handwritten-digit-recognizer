@@ -18,7 +18,8 @@ setup(
 
     entry_points={
         "console_scripts": [
-            "mnist-handwritten-digit-recognizer-cli=src.keras_model1.main:main"
+            "mnist-ann-cli=src.run_ann.main:main",
+            "mnist-cnn-cli=src.run_cnn.main:main"
         ]
     },
 

@@ -3,7 +3,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.python import keras
 
 
-class KerasSequentialModel():
+class CustomANNModel():
 
     def __init__(self) -> None:
         self.dense1 = Dense(input_dim=(784,), units=512, activation="relu",
@@ -25,3 +25,14 @@ class KerasSequentialModel():
         x = self.dense5(x)
         return x
 
+    def train(self, x_train, y_train, x_test, y_test, epochs=10, batch_size=32):
+        model = Sequential()
+        model.add(self.dense1)
+        model.add(self.dense2)
+        model.add(self.dense3)
+        model.add(self.dense4)
+        model.add(self.dense5)
+        model.compile(loss="sparse_categorical_crossentropy",
+                      optimizer="adam", metrics=["accuracy"])
+        model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size)
+        model.evaluate(x_test, y_test)
