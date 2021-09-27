@@ -36,5 +36,4 @@ class CustomANNModel():
                       optimizer="adam", metrics=["accuracy"])
         model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size)
         y_pred = model.predict(X_test)
-        model.evaluate(y_test,y_pred)
-        
+        model.evaluate(y_test, y_pred)
