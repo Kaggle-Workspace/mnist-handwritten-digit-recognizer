@@ -25,7 +25,7 @@ class CustomANNModel():
         x = self.dense5(x)
         return x
 
-    def train(self, x_train, y_train, x_test, y_test, epochs=10, batch_size=32):
+    def train(self, X_train, X_test, y_train, y_test, epochs=10, batch_size=32):
         model = Sequential()
         model.add(self.dense1)
         model.add(self.dense2)
@@ -34,5 +34,7 @@ class CustomANNModel():
         model.add(self.dense5)
         model.compile(loss="sparse_categorical_crossentropy",
                       optimizer="adam", metrics=["accuracy"])
-        model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size)
-        model.evaluate(x_test, y_test)
+        model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size)
+        y_pred = model.predict(X_test)
+        model.evaluate(y_test,y_pred)
+        

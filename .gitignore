@@ -1,4 +1,5 @@
 # My own custom exception
+.vsocde/
 build/
 data/
 dataset/
