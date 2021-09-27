@@ -6,7 +6,7 @@ from tensorflow.python import keras
 class CustomANNModel():
 
     def __init__(self) -> None:
-        self.dense1 = Dense(input_dim=(784,), units=512, activation="relu",
+        self.dense1 = Dense(input_dim=784, units=512, activation="relu",
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
         self.dense2 = Dense(units=256, activation="relu",
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
@@ -32,8 +32,12 @@ class CustomANNModel():
         model.add(self.dense3)
         model.add(self.dense4)
         model.add(self.dense5)
-        model.compile(loss="sparse_categorical_crossentropy",
+        model.compile(loss="categorical_crossentropy",
                       optimizer="adam", metrics=["accuracy"])
-        model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size)
+        model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,verbose=1)
         y_pred = model.predict(X_test)
-        model.evaluate(y_test, y_pred)
+        print(y_pred)
+
+        print("Evaluating on test data")
+        results = model.evaluate(X_test, y_test, batch_size=batch_size)
+        print("test loss, test acc:", results)

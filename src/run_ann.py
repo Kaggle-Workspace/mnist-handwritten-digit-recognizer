@@ -18,12 +18,11 @@ def main():
         os.path.dirname(__file__), "../data/train.csv"))
 
     X, y = data.iloc[:, 1:].values, data.iloc[:, 0].values
-    print(X.shape , y.shape)
+    print(X.shape, y.shape)
     X_train, X_valid, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42)
 
-    model.train(X_train, X_valid, y_train, y_test, epochs=32, batch_size=32)
-
+    model.train(X_train, X_valid, y_train, y_test, epochs=3, batch_size=32)
 
 
 if __name__ == '__main__':
