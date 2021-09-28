@@ -14,26 +14,36 @@ class ANN1():
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
         self.dense4 = Dense(units=10, activation="softmax",
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense5 = Dense(units=1, activation="sigmoid",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-    def train(self, X_train, X_test, y_train, y_test, epochs=10, batch_size=32):
-        model = Sequential()
-        model.add(self.dense1)
-        model.add(self.dense2)
-        model.add(self.dense3)
-        model.add(self.dense4)
-        model.add(self.dense5)
-        model.compile(loss="categorical_crossentropy",
-                      optimizer="adam", metrics=["accuracy"])
-        model.fit(X_train, y_train, epochs=epochs,
-                  batch_size=batch_size, verbose=1)
-        y_pred = model.predict(X_test)
+        # This is classification NOT regression
+        # self.dense5 = Dense(units=1, activation="sigmoid",
+        #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
+
+    def train(self, X_train, X_valid, y_train, y_valid,
+              epochs=10, batch_size=32,
+              loss="sparse_categorical_crossentropy",
+              optimizer="adam", metrics=["accuracy"]
+              ):
+        self.model = Sequential()
+        self.model.add(self.dense1)
+        self.model.add(self.dense2)
+        self.model.add(self.dense3)
+        self.model.add(self.dense4)
+        # self.model.add(self.dense5)
+        self.model.compile(loss=loss,
+                           optimizer=optimizer, metrics=metrics)
+        self.model.fit(X_train, y_train, epochs=epochs,
+                       batch_size=batch_size, verbose=1)
+        y_pred = self.model.predict_classes(X_valid)
         print(y_pred)
 
-        print("Evaluating on test data")
-        results = model.evaluate(X_test, y_test, batch_size=batch_size)
-        print("test loss, test acc:", results)
+        print("Evaluating on valid data")
+        results = self.model.evaluate(X_valid, y_valid, batch_size=batch_size)
+        print("valid loss, valid acc:", results)
+
+    def predict(self, X_test):
+        y_pred = self.model.predict_classes(X_test)
+        return y_pred
 
 
 class ANN2():
@@ -42,21 +52,31 @@ class ANN2():
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
         self.dense2 = Dense(units=10, activation="softmax",
                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense3 = Dense(units=1, activation="sigmoid",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-    def train(self, X_train, X_test, y_train, y_test, epochs=10, batch_size=32):
-        model = Sequential()
-        model.add(self.dense1)
-        model.add(self.dense2)
-        model.add(self.dense3)
-        model.compile(loss="categorical_crossentropy",
-                      optimizer="adam", metrics=["accuracy"])
-        model.fit(X_train, y_train, epochs=epochs,
-                  batch_size=batch_size, verbose=1)
-        y_pred = model.predict(X_test)
+        # This is classification NOT regression
+        # self.dense3 = Dense(units=1, activation="sigmoid",
+        #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
+
+    def train(self, X_train, X_valid, y_train, y_valid,
+              epochs=10, batch_size=32,
+              loss="sparse_categorical_crossentropy",
+              optimizer="adam", metrics=["accuracy"]
+              ):
+        self.model = Sequential()
+        self.model.add(self.dense1)
+        self.model.add(self.dense2)
+        # self.model.add(self.dense3)
+        self.model.compile(loss=loss,
+                           optimizer=optimizer, metrics=metrics)
+        self.model.fit(X_train, y_train, epochs=epochs,
+                       batch_size=batch_size, verbose=1)
+        y_pred = self.model.predict_classes(X_valid)
         print(y_pred)
 
-        print("Evaluating on test data")
-        results = model.evaluate(X_test, y_test, batch_size=batch_size)
-        print("test loss, test acc:", results)
+        print("Evaluating on valid data")
+        results = self.model.evaluate(X_valid, y_valid, batch_size=batch_size)
+        print("valid loss, valid acc:", results)
+
+    def predict(self, X_test):
+        y_pred = self.model.predict_classes(X_test)
+        return y_pred
