@@ -41,7 +41,7 @@ class ANN1():
         results = self.model.evaluate(X_valid, y_valid, batch_size=batch_size)
         print("valid loss, valid acc:", results)
 
-    def predict(self, X_test):
+    def predict_test_classes(self, X_test):
         y_pred = self.model.predict_classes(X_test)
         return y_pred
 
@@ -77,6 +77,6 @@ class ANN2():
         results = self.model.evaluate(X_valid, y_valid, batch_size=batch_size)
         print("valid loss, valid acc:", results)
 
-    def predict(self, X_test):
+    def predict_test_classes(self, X_test):
         y_pred = self.model.predict_classes(X_test)
         return y_pred
