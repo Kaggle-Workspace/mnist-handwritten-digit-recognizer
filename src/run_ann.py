@@ -1,17 +1,9 @@
-
 import csv
 import os
 
-from scipy.sparse.construct import rand
-from tensorflow.python.keras.backend import shape
-from models.ann_models import ANN1, ANN2
-import matplotlib.pyplot as plt
-import sys
-import numpy as np
 import pandas as pd
-
+from models.ann_models import ANN1, ANN2
 from sklearn.model_selection import train_test_split
-from tensorflow.python.ops.gen_control_flow_ops import ref_next_iteration
 
 
 def main():
