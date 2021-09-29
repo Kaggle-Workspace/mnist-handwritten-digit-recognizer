@@ -42,5 +42,4 @@ class CNN1(tf.keras.Model):
         x = self.dropout_2(x, training=training)
 
         x = self.flatten(x)
-        x = self.dense_1(x)
-        return x
+        return self.dense_1(x)
