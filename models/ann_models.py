@@ -1,43 +1,17 @@
+
+import numpy as np
+import tensorflow as tf
+from sklearn.metrics import (accuracy_score, f1_score, precision_score,
+                             recall_score)
 from tensorflow.keras.layers import Dense
-from tensorflow.keras.models import Sequential
-from tensorflow.python import keras
+from tensorflow.keras import Input, Model
 
 
-class ANNDefaultModel():
+class ANNModel1(tf.keras.Model):
 
-    def __init__(self) -> None:
-        pass
-
-    def train(self, X_train, X_valid, y_train, y_valid,
-              epochs=10, batch_size=32,
-              loss="sparse_categorical_crossentropy",
-              optimizer="adam", metrics=["accuracy"]
-              ):
-        self.model.compile(loss=loss,
-                           optimizer=optimizer, metrics=metrics)
-        self.model.fit(
-            X_train, y_train, epochs=epochs,
-            batch_size=batch_size, verbose=1,
-            # validation_data=(X_valid, y_valid)
-        )
-        y_pred = self.model.predict_classes(X_valid)
-        print(y_pred)
-
-        print("Evaluating on valid data")
-        results = self.model.evaluate(X_valid, y_valid, batch_size=batch_size)
-        print("valid loss, valid acc:", results)
-
-    def predict_test_classes(self, X_test):
-        y_pred = self.model.predict_classes(X_test)
-        return y_pred
-
-
-class ANN1(ANNDefaultModel):
-
-    def __init__(self) -> None:
-        super(ANNDefaultModel, self).__init__()
-
-        self.dense_1 = Dense(input_dim=784, units=512, activation="relu",
+    def __init__(self):
+        super(ANNModel1, self).__init__()
+        self.dense_1 = Dense(input_shape=(784,), units=512, activation="relu",
                              kernel_initializer="glorot_uniform", bias_initializer="zeros")
         self.dense_2 = Dense(units=256, activation="relu",
                              kernel_initializer="glorot_uniform", bias_initializer="zeros")
@@ -55,19 +29,30 @@ class ANN1(ANNDefaultModel):
         # self.dense_5 = Dense(units=1, activation="sigmoid",
         #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-        self.model = Sequential()
-        self.model.add(self.dense_1)
-        self.model.add(self.dense_2)
-        self.model.add(self.dense_3)
-        self.model.add(self.dense_4)
-        # self.model.add(self.dense_5)
+    # Dont use forward, use call
+    def call(self, inputs):
+        x = self.dense_1(inputs)
+        x = self.dense_2(x)
+        x = self.dense_3(x)
+        x = self.dense_4(x)
+        # x = self.dense_5(x)
+        return x
+
+    def model(self):
+        x = Input(shape=(28, 28, 1))
+        return Model(inputs=[x], outputs=self.call(x))
+
+    def summary(self):
+        x = Input(shape=(28, 28, 1))
+        model = Model(inputs=[x], outputs=self.call(x))
+        return model.summary()
 
 
-class ANN2(ANNDefaultModel):
-    def __init__(self) -> None:
-        super(ANNDefaultModel, self).__init__()
+class ANNModel2(tf.keras.Model):
 
-        self.dense_1 = Dense(input_dim=784, units=800, activation="relu",
+    def __init__(self):
+        super(ANNModel2, self).__init__()
+        self.dense_1 = Dense(input_shape=(784,), units=800, activation="relu",
                              kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
         self.dense_2 = Dense(units=10, activation="softmax",
@@ -76,7 +61,18 @@ class ANN2(ANNDefaultModel):
         # self.dense_3 = Dense(units=1, activation="sigmoid",
         #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-        self.model = Sequential()
-        self.model.add(self.dense_1)
-        self.model.add(self.dense_2)
-        # self.model.add(self.dense_3)
+    # Dont use forward, use call
+    def call(self, inputs):
+        x = self.dense_1(inputs)
+        x = self.dense_2(x)
+        # x = self.dense_3(x)
+        return x
+
+    def model(self):
+        x = Input(shape=(28, 28, 1))
+        return Model(inputs=[x], outputs=self.call(x))
+
+    def summary(self):
+        x = Input(shape=(28, 28, 1))
+        model = Model(inputs=[x], outputs=self.call(x))
+        return model.summary()
