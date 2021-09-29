@@ -38,21 +38,21 @@ class CNN1(CNNDefaultModel):
     def __init__(self) -> None:
         super(CNNDefaultModel, self).__init__()
 
-        self.conv2d1 = Conv2D(input_shape=(28, 28, 1), filters=64, kernel_size=(
+        self.conv2d_1 = Conv2D(input_shape=(784,), filters=64, kernel_size=(
             1, 1), activation="relu", padding="valid")
-        self.conv2d2 = Conv2D(filters=32, kernel_size=(
+        self.conv2d_2 = Conv2D(filters=32, kernel_size=(
             1, 1), activation="relu", padding="valid")
-        self.pool2d1 = MaxPool2D()
-        self.flatten1 = Flatten()
-        self.dropout1 = Dropout(0.2)
-        self.fc1 = Dense(units=10, activation="softmax",
-                         kernel_initializer="he_uniform", bias_initializer="zeros")
+        self.pool2d_1 = MaxPool2D(pool_size=(2, 2))
+        self.flatten_1 = Flatten()
+        self.dropout_1 = Dropout(0.2)
+        self.fc_1 = Dense(units=10, activation="softmax",
+                          kernel_initializer="he_uniform", bias_initializer="zeros")
 
         self.model = Sequential()
-        self.model.add(self.conv2d1)
-        self.model.add(self.conv2d2)
-        self.model.add(self.pool2d1)
-        self.model.add(self.flatten1)
-        self.model.add(self.dropout1)
-        self.model.add(self.fc1)
+        self.model.add(self.conv2d_1)
+        self.model.add(self.conv2d_2)
+        self.model.add(self.pool2d_1)
+        self.model.add(self.flatten_1)
+        self.model.add(self.dropout_1)
+        self.model.add(self.fc_1)
         print(self.model.summary())

@@ -37,41 +37,46 @@ class ANN1(ANNDefaultModel):
     def __init__(self) -> None:
         super(ANNDefaultModel, self).__init__()
 
-        self.dense1 = Dense(input_dim=784, units=512, activation="relu",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense2 = Dense(units=256, activation="relu",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense3 = Dense(units=128, activation="relu",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense4 = Dense(units=10, activation="softmax",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
+        self.dense_1 = Dense(input_dim=784, units=512, activation="relu",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
+        self.dense_2 = Dense(units=256, activation="relu",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
+        self.dense_3 = Dense(units=128, activation="relu",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-        # This is classification NOT regression
-        # self.dense5 = Dense(units=1, activation="sigmoid",
+        # np.argmax(model.predict(x), axis=-1),
+        # if your model does multi-class classification (e.g. if it uses a softmax last-layer activation).
+        # (model.predict(x) > 0.5).astype("int32"),
+        # if your model does binary classification (e.g. if it uses a sigmoid last-layer activation).
+
+        self.dense_4 = Dense(units=10, activation="softmax",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
+
+        # self.dense_5 = Dense(units=1, activation="sigmoid",
         #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
         self.model = Sequential()
-        self.model.add(self.dense1)
-        self.model.add(self.dense2)
-        self.model.add(self.dense3)
-        self.model.add(self.dense4)
-        # self.model.add(self.dense5)
+        self.model.add(self.dense_1)
+        self.model.add(self.dense_2)
+        self.model.add(self.dense_3)
+        self.model.add(self.dense_4)
+        # self.model.add(self.dense_5)
 
 
 class ANN2(ANNDefaultModel):
     def __init__(self) -> None:
         super(ANNDefaultModel, self).__init__()
 
-        self.dense1 = Dense(input_dim=784, units=800, activation="relu",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
-        self.dense2 = Dense(units=10, activation="softmax",
-                            kernel_initializer="glorot_uniform", bias_initializer="zeros")
+        self.dense_1 = Dense(input_dim=784, units=800, activation="relu",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
-        # This is classification NOT regression
-        # self.dense3 = Dense(units=1, activation="sigmoid",
+        self.dense_2 = Dense(units=10, activation="softmax",
+                             kernel_initializer="glorot_uniform", bias_initializer="zeros")
+
+        # self.dense_3 = Dense(units=1, activation="sigmoid",
         #                     kernel_initializer="glorot_uniform", bias_initializer="zeros")
 
         self.model = Sequential()
-        self.model.add(self.dense1)
-        self.model.add(self.dense2)
-        # self.model.add(self.dense3)
+        self.model.add(self.dense_1)
+        self.model.add(self.dense_2)
+        # self.model.add(self.dense_3)
