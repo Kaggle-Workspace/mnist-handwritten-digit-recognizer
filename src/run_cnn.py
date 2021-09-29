@@ -66,11 +66,31 @@ def main():
     # plot_image_grid(X_train, y_train, nrows, ncols)
 
     model = CNN1()
+    model.build(input_shape=(28, 28, 1))
     # model.train(X_train, X_valid, y_train,
     #             y_valid, epochs=10, batch_size=32)
 
-    y_pred = model.predict_test_classes(X_test)
+    # y_pred = model.predict_test_classes(X_test)
+    # print(y_pred)
+    epochs = 10
+    batch_size = 32
+    loss = "sparse_categorical_crossentropy",
+    optimizer = "adam"
+    metrics = ["accuracy"]
+
+    model.compile(loss=loss,
+                  optimizer=optimizer, metrics=metrics)
+    model.fit(
+        X_train, y_train, epochs=epochs,
+        batch_size=batch_size, verbose=1,
+        # validation_data=(X_valid, y_valid)
+    )
+    y_pred = np.argmax(model.predict(X_valid), axis=-1)
     print(y_pred)
+
+    print("Evaluating on valid data")
+    results = model.evaluate(X_valid, y_valid, batch_size=batch_size)
+    print("valid loss, valid acc:", results)
 
 
 if __name__ == '__main__':

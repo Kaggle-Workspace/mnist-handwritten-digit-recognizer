@@ -7,12 +7,9 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.layers import Conv2D, Dense, Dropout, MaxPool2D
+from tensorflow.keras.layers import (BatchNormalization, Conv2D, Dense,
+                                     Dropout, Flatten, MaxPool2D)
 from tensorflow.keras.models import Sequential
-from tensorflow.python.keras.constraints import UnitNorm
-from tensorflow.python.keras.engine import input_spec
-from tensorflow.python.keras.layers.core import Flatten
-
 
 # gpus = tf.config.experimental.list_physical_devices('GPU')
 # tf.config.experimental.set_memory_growth(gpus[0], True)
@@ -28,6 +25,7 @@ def main():
     X = X.reshape(X.shape[0], 28, 28, 1)
     X = X.astype('float32')
     X /= 255
+    
     y = np.array(y)
     y = y.reshape(y.shape[0], 1)
     y = y.astype('int32')
@@ -42,12 +40,14 @@ def main():
               input_shape=X_train.shape[1:]))
     model.add(Conv2D(filters=32, kernel_size=(3, 3), activation='relu'))
     model.add(MaxPool2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(BatchNormalization())
     model.add(Dropout(0.5))
 
     # 2nd convolution layer
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPool2D(pool_size=(2, 2), strides=(2, 2)))
+    model.add(BatchNormalization())
     model.add(Dropout(0.5))
 
     # # 3rd convolution layer
