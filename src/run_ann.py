@@ -14,7 +14,7 @@ def main():
 
     X, y = df_train.iloc[0:, 1:].values, df_train.iloc[0:, 0].values
     print("The shape of the input is: ", X.shape, y.shape)
-    X_train, X_valid, y_train, y_test = train_test_split(
+    X_train, X_valid, y_train, y_valid = train_test_split(
         X, y, test_size=0.2, random_state=42)
 
     X_test = df_test.iloc[0:, 0:].values
@@ -22,7 +22,7 @@ def main():
     # model = ANN1()
     model = ANN2()
     model.train(X_train, X_valid, y_train,
-                y_test, epochs=10, batch_size=32)
+                y_valid, epochs=10, batch_size=32)
 
     y_pred = model.predict_test_classes(X_test)
     print(y_pred)

@@ -15,8 +15,11 @@ class ANNDefaultModel():
               ):
         self.model.compile(loss=loss,
                            optimizer=optimizer, metrics=metrics)
-        self.model.fit(X_train, y_train, epochs=epochs,
-                       batch_size=batch_size, verbose=1)
+        self.model.fit(
+            X_train, y_train, epochs=epochs,
+            batch_size=batch_size, verbose=1,
+            # validation_data=(X_valid, y_valid)
+        )
         y_pred = self.model.predict_classes(X_valid)
         print(y_pred)
 

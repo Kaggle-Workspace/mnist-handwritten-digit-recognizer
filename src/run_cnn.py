@@ -66,7 +66,11 @@ def main():
     # plot_image_grid(X_train, y_train, nrows, ncols)
 
     model = CNN1()
-    model.train()
+    model.train(X_train, X_valid, y_train,
+                y_valid, epochs=10, batch_size=32)
+
+    y_pred = model.predict_test_classes(X_test)
+    print(y_pred)
 
 
 if __name__ == '__main__':
