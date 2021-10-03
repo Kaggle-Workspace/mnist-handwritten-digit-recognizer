@@ -27,7 +27,7 @@ def make_model():
             input_shape=(784,),
             units=512,
             activation="relu",
-            kernel_initializer="glorot_uniform",
+            kernel_initializer="he_normal",
             bias_initializer="zeros",
         )
     )
@@ -36,7 +36,7 @@ def make_model():
         Dense(
             units=256,
             activation="relu",
-            kernel_initializer="glorot_uniform",
+            kernel_initializer="he_normal",
             bias_initializer="zeros",
         )
     )
@@ -45,7 +45,7 @@ def make_model():
         Dense(
             units=128,
             activation="relu",
-            kernel_initializer="glorot_uniform",
+            kernel_initializer="he_normal",
             bias_initializer="zeros",
         )
     )
@@ -55,7 +55,7 @@ def make_model():
         Dense(
             units=10,
             activation="softmax",
-            kernel_initializer="glorot_uniform",
+            kernel_initializer="he_normal",
             bias_initializer="zeros",
         )
     )
@@ -65,7 +65,7 @@ def make_model():
     #     Dense(
     #         units=1,
     #         activation="sigmoid",
-    #         kernel_initializer="glorot_uniform",
+    #         kernel_initializer="he_normal",
     #         bias_initializer="zeros",
     #     )
     # )

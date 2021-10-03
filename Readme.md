@@ -6,8 +6,8 @@ https://www.kaggle.com/c/digit-recognizer/overview/description
 
 ### Standings
 
-- Best Validation Accuration: 99.26 %
-- Best Public Score: 0.9905/1.0000 (Ranked 511/1570[Top 33%])
+- Best Validation Accuration: 99.17 %
+- Best Public Score: 0.99210/1.0000 (Ranked 387/1570[Top 26%])
 
 ## Here are the project files
 
