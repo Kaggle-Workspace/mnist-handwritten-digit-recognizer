@@ -47,9 +47,9 @@ def predict_test_classes(model, X_test):
 
 def main():
     df_train = pd.read_csv(os.path.join(
-        os.path.dirname(__file__), "../data/train.csv"))
+        os.path.dirname(__file__), "../input/train.csv"))
     df_test = pd.read_csv(os.path.join(
-        os.path.dirname(__file__), "../data/test.csv"))
+        os.path.dirname(__file__), "../input/test.csv"))
 
     X, y = df_train.iloc[0:, 1:].values, df_train.iloc[0:, 0].values
     print("The shape of the input is: ", X.shape, y.shape)

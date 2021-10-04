@@ -109,9 +109,9 @@ def main():
 
     # Loading the data
     df_train = pd.read_csv(os.path.join(
-        os.path.dirname(__file__), "../data/train.csv"))
+        os.path.dirname(__file__), "../input/train.csv"))
     df_test = pd.read_csv(os.path.join(
-        os.path.dirname(__file__), "../data/test.csv"))
+        os.path.dirname(__file__), "../input/test.csv"))
     print(df_train.sample(10))
 
     X, y = df_train.iloc[:, 1:].values, df_train.iloc[:, 0].values
